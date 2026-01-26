@@ -20,10 +20,21 @@ class malicious_url_filter {
             ## Malicious URL Filter Constructor
             @brief Creates a malicious_url_filter object. 
         **/
-        malicious_url_filter() : map(4481) {
-            // add all the blocked IPs to the hash map
-            std::ifstream file{"resources/block.txt"};
+        malicious_url_filter() : map(1) {
+
+            // count how many lines there are
+            int line_count = 0;
             std::string line;
+            std::ifstream file("resources/block.txt");
+            while (std::getline(file, line)) line_count++;
+
+            // create the hash map based on the number of lines
+            int bucket_count = line_count / 0.75;
+            map = HashMapType(bucket_count);
+
+            // add all the blocked IPs to the hash map
+            file = std::ifstream("resources/block.txt");
+            line.clear();
             int i = 1;
             while (std::getline(file,line)) {
                 map.insert(value_type(line,i));
