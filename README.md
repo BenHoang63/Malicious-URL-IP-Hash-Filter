@@ -2,7 +2,7 @@
 
 A compact, high-performance malicious URL/IP filter implemented in modern C++ using a custom hash map.
 
-This repository demonstrates a production-minded implementation of a hash-table based filter optimized for real-world trade-offs between runtime and memory. It's written to be clear, efficient, and easy to reason about — the kind of code I show to recruiters when discussing systems design, hashing strategies, and performance engineering.
+This repository demonstrates an implementation of a hash-table based filter optimized for real-world trade-offs between runtime and memory. It's written to be clear, efficient, and easy to reason about.
 
 ## Highlights
 
@@ -85,26 +85,7 @@ This repo contains no heavy benchmarking harness, but the design choices priorit
 
 If you want microbenchmarks, I can add a simple harness using <chrono> to measure thousands of lookups/inserts and produce averages.
 
-## Future work (good talking points for interviews)
-
-- Rehash/resize path: add dynamic growing to maintain load factor automatically on heavy inserts.
-- Open-addressing variant: implement linear/quadratic probing for better cache locality and compare performance.
-- SIMD / parallel bulk lookups for high-throughput filtering pipelines.
-- Add unit tests (GoogleTest) and CI to assert complexity and correctness across edge cases.
-
 ## Contributing
 
 This repo is intentionally compact. If you find a bug or want to add benchmarks/tests, open an issue or a PR. I review and respond quickly.
 
-## License
-
-MIT — see `LICENSE`.
-
----
-
-If you'd like, I can also:
-
-- Add a small benchmark harness and report (typical/99th percentile lookup latencies on my machine).
-- Add unit tests for the hash map and filter.
-
-Tell me which you want next and I can add it.
