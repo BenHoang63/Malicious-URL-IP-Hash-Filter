@@ -2,7 +2,7 @@
 
 A compact, high-performance malicious URL/IP filter implemented in modern C++ using a custom hash map.
 
-This repository demonstrates an implementation of a hash-table based filter optimized for real-world trade-offs between runtime and memory. It's written to be clear, efficient, and easy to reason about.
+This project is an implementation of a hash-table based filter optimized for real-world trade-offs between runtime and memory.
 
 ## Highlights
 
@@ -19,7 +19,7 @@ Hash tables are common — but the details matter for a filter used in high-thro
 - Separate chaining + prime bucket counts: Buckets are prime-sized (via `primes.h`) to reduce clustering and modulo bias when mapping hash codes to buckets.
 - Conservative load factor (~0.75): This keeps most buckets short (1–2 nodes average) so that lookups remain effectively constant time while avoiding excessive memory blow-up from large bucket arrays.
 
-These choices make the code performant for a blocked-IP/URL lookup service while keeping memory usage reasonable — the exact balance that matters in production systems.
+These choices make the code performant for a blocked-IP/URL lookup service while keeping memory usage reasonable, which is the exact balance that is important in production systems.
 
 ## Design & Implementation
 
@@ -82,8 +82,6 @@ This repo contains no heavy benchmarking harness, but the design choices priorit
 
 - Low per-lookup latency (short linked lists, fast integer math in FNV-1A).
 - Predictable memory usage (prime bucket sizing + controlled load factor).
-
-If you want microbenchmarks, I can add a simple harness using <chrono> to measure thousands of lookups/inserts and produce averages.
 
 ## Contributing
 
