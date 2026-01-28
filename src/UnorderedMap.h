@@ -80,7 +80,6 @@ class UnorderedMap {
         reference operator*() const { return _ptr->val; }
         pointer operator->() const { return &(_ptr->val); }
 
-        // HashNode* increment() { return this->_map->_buckets[this->_map->_bucket(this->_ptr->val.first) + 1]; }
         HashNode* increment() {
             if (this->_map == nullptr || this->_ptr == nullptr) return nullptr;
 
@@ -156,7 +155,7 @@ private:
     size_type _bucket(const Key & key) const { return _bucket(_hash(key)); }
     size_type _bucket(const value_type & val) const { return _bucket(_hash(val.first)); }
 
-    HashNode* _find(size_type bucket, const Key & key) { /* TODO */ 
+    HashNode* _find(size_type bucket, const Key & key) {
 
         // get the first node of bucket 
         HashNode* current = this->_buckets[bucket];
@@ -390,7 +389,7 @@ public:
 
     size_type bucket(const Key & key) const { return this->_bucket(key); }
 
-    std::pair<iterator, bool> insert(value_type && value) { /* TODO */ 
+    std::pair<iterator, bool> insert(value_type && value) { 
         size_type bucket = _bucket(value.first);
         
         // check if the value exists
@@ -403,12 +402,11 @@ public:
         return std::pair<iterator,bool>(iterator(this,node),true);
     }
 
-    std::pair<iterator, bool> insert(const value_type & value) { /* TODO */ 
+    std::pair<iterator, bool> insert(const value_type & value) { 
         size_type bucket = _bucket(value.first);
         
         // check if the value exists
         HashNode * node = _find(bucket, value.first);
-        // cout << value.first << " | " << value.second << "\n";
         if (node != nullptr) { return std::pair<iterator,bool>(iterator(this,node),false); }
 
         // if not, then create the new hash node
